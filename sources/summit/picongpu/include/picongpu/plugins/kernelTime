@@ -1,0 +1,65 @@
+IsaacPlugin.hpp:                        visualization->getCommunicator()->setMessage(feedback);
+IsaacPlugin.hpp:                    writeTimes(visualization->kernelTime);
+IsaacPlugin.hpp:                    //writeTimesd(visualization->icetCompositeTime);
+IsaacPlugin.hpp:		    //writeTimesd(visualization->icetBlendTime);
+IsaacPlugin.hpp:		    //writeTimesd(visualization->icetTotalDrawTime);
+IsaacPlugin.hpp:		    writeTimes(visualization->mergeTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->videoSendTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->copyTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->sortingTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->bufferTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->advectionTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->advectionBorderTime);
+IsaacPlugin.hpp:                    writeTimes(visualization->optimizationBufferTime);
+IsaacPlugin.hpp:                            visualization->updatePosition(position);
+IsaacPlugin.hpp:                            visualization->updateBounding();
+IsaacPlugin.hpp:                            visualization->updateNeighbours(neighbourIds);
+IsaacPlugin.hpp:                        if(rank == 0 && visualization->kernelTime)
+IsaacPlugin.hpp:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                        json_t* meta = visualization->doVisualization(META_MASTER, &currentStep, !pause);
+IsaacPlugin.hpp:                                    visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                    visualization->setJpegQuality(jpeg_quality);
+IsaacPlugin.hpp:                    visualization->updateNeighbours(neighbourIds);
+IsaacPlugin.hpp:                        json_object_set_new(visualization->getJsonMetaRoot(), "time step", json_string("Time step"));
+IsaacPlugin.hpp:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp:                    if(visualization->init(communicatorBehaviour) != 0)
+IsaacPlugin.hpp:                        visualization->getCommunicator()->setMessage(feedback);
+IsaacPlugin.hpp:                            visualization->getCommunicator()->setMessage(feedback);
+IsaacPlugin.hpp.bak:                        visualization->getCommunicator()->setMessage(feedback);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->kernelTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->mergeTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->videoSendTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->copyTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->sortingTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->bufferTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->advectionTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->advectionBorderTime);
+IsaacPlugin.hpp.bak:                    writeTimes(visualization->optimizationBufferTime);
+IsaacPlugin.hpp.bak:                            visualization->updatePosition(position);
+IsaacPlugin.hpp.bak:                            visualization->updateBounding();
+IsaacPlugin.hpp.bak:                            visualization->updateNeighbours(neighbourIds);
+IsaacPlugin.hpp.bak:                        if(rank == 0 && visualization->kernelTime)
+IsaacPlugin.hpp.bak:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                                visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                        json_t* meta = visualization->doVisualization(META_MASTER, &currentStep, !pause);
+IsaacPlugin.hpp.bak:                                    visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                    visualization->setJpegQuality(jpeg_quality);
+IsaacPlugin.hpp.bak:                    visualization->updateNeighbours(neighbourIds);
+IsaacPlugin.hpp.bak:                        json_object_set_new(visualization->getJsonMetaRoot(), "time step", json_string("Time step"));
+IsaacPlugin.hpp.bak:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                            visualization->getJsonMetaRoot(),
+IsaacPlugin.hpp.bak:                    if(visualization->init(communicatorBehaviour) != 0)
+IsaacPlugin.hpp.bak:                        visualization->getCommunicator()->setMessage(feedback);
+IsaacPlugin.hpp.bak:                            visualization->getCommunicator()->setMessage(feedback);

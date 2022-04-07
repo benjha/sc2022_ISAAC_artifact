@@ -1,0 +1,141 @@
+/* Copyright 2020-2022 Franz Poeschel
+ *
+ * This file is part of PIConGPU.
+ *
+ * PIConGPU is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * PIConGPU is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PIConGPU.
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+#pragma once
+
+#include "openPMD/openPMD.hpp"
+
+#include <cstdlib> // std::getenv
+#include <memory>
+#include <string> // std::stoull
+#include <utility> // std::declval
+
+namespace picongpu
+{
+    namespace openPMD
+    {
+        /*
+         * Do some SFINAE tricks to detect whether the openPMD API has
+         * dataset-specific configuration or not.
+         */
+        namespace detail
+        {
+            template<typename ValueType>
+            struct openPMDSpan
+            {
+                using DynamicMemoryView = ::openPMD::DynamicMemoryView<ValueType>;
+
+                bool m_useSpanAPI; // depending on the value of this, use either m_bufferFallback or m_bufferSpan
+                // need a pointer here since DynamicMemoryView has no default constructor
+                std::unique_ptr<DynamicMemoryView> m_bufferSpan;
+                std::shared_ptr<ValueType> m_bufferFallback;
+
+                ValueType* currentBuffer()
+                {
+                    return m_useSpanAPI ? m_bufferSpan->currentBuffer().data() : m_bufferFallback.get();
+                }
+
+                template<typename Functor>
+                openPMDSpan(
+                    ::openPMD::RecordComponent& rc,
+                    ::openPMD::Offset offset,
+                    ::openPMD::Extent extent,
+                    bool useSpanAPI,
+                    Functor&& createBaseBuffer)
+                    : m_useSpanAPI(useSpanAPI)
+                {
+                    if(m_useSpanAPI)
+                    {
+                        m_bufferSpan = std::make_unique<DynamicMemoryView>(rc.storeChunk<ValueType>(
+                            std::move(offset),
+                            std::move(extent),
+                            std::forward<Functor>(createBaseBuffer)));
+                    }
+                    else
+                    {
+                        using extent_t = ::openPMD::Extent::value_type;
+                        extent_t scalarExtent = 1;
+                        for(auto val : extent)
+                        {
+                            scalarExtent *= val;
+                        }
+                        m_bufferFallback = std::forward<Functor>(createBaseBuffer)(scalarExtent);
+                        rc.storeChunk(m_bufferFallback, std::move(offset), std::move(extent));
+                    }
+                }
+            };
+        } // namespace detail
+
+        /*
+         * This mocks the span-based storeChunk API available in openPMD with
+         * PR 901 https://github.com/openPMD/openPMD-api/pull/901
+         * For recent versions of openPMD, this does a simple pass-through to
+         * that API, for older versions a fallback is implemented by PIConGPU.
+         * detail::openPMDSpan<ValueType> behaves similarly to
+         * ::openPMD::DynamicMemoryView and calling ::currentBuffer() on it
+         * will return a pointer to a buffer into which data may be written.
+         */
+        template<typename ValueType, typename Functor>
+        auto storeChunkSpan(
+            ::openPMD::RecordComponent& rc,
+            ::openPMD::Offset offset,
+            ::openPMD::Extent extent,
+            Functor&& createBaseBuffer) -> detail::openPMDSpan<ValueType>
+        {
+            /*
+             * openPMD-api >= 0.14.4 automatically disables the
+             * span-based Put() API in ADIOS2 if compression is used.
+             */
+            bool useSpanAPI = OPENPMDAPI_VERSION_GE(0, 14, 4);
+            {
+                auto value = std::getenv("openPMD_USE_STORECHUNK_SPAN");
+                unsigned long long valueAsLong{};
+                if(value)
+                {
+                    try
+                    {
+                        valueAsLong = std::stoull(value);
+                    }
+                    catch(std::invalid_argument const&)
+                    {
+                        throw std::runtime_error("Environment variable 'openPMD_USE_STORECHUNK_SPAN' may only be set "
+                                                 "to values '0' or '1'.");
+                    }
+                    switch(valueAsLong)
+                    {
+                    case 0:
+                        useSpanAPI = false;
+                        break;
+                    case 1:
+                        useSpanAPI = true;
+                        break;
+                    default:
+                        throw std::runtime_error("Environment variable 'openPMD_USE_STORECHUNK_SPAN' may only be set "
+                                                 "to values '0' or '1'.");
+                    }
+                }
+            }
+            return detail::openPMDSpan<ValueType>(
+                rc,
+                std::move(offset),
+                std::move(extent),
+                useSpanAPI,
+                std::forward<Functor>(createBaseBuffer));
+        }
+    } // namespace openPMD
+} // namespace picongpu

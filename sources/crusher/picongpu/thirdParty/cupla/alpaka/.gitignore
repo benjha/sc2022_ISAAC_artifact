@@ -1,0 +1,38 @@
+/docs/doxygen/*
+
+**/build
+
+# tmp files
+*~
+
+# netbeans project files
+/nbproject/
+
+# Code::Blocks project files
+/*.cbp
+/*.layout
+
+# original backup files
+*.orig
+
+# Vim project files
+.vimrc
+
+# Neovim project files
+.exrc
+
+# IDE & tmp build
+.idea/
+cmake-build-*/
+.kdev?/
+*.kdev?
+spack-build*
+build/
+
+# Eclipse project files
+/.project
+/.cproject
+/.settings/
+
+# Visual Studio Code project files
+.cache/
