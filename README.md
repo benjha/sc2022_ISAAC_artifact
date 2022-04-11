@@ -38,3 +38,23 @@ We include three scripts to deploy the experiments in Summit and Crusher systems
 2. [`install.sh`](https://github.com/benjha/sc2022_ISAAC_artifact/blob/main/install.sh). This script compiles and installs ISAAC, and the Kelvin-Helmholtz instability simulation. This script is only runnable by the user and should not be modified. 
 3. [`run_experiment.sh`](https://github.com/benjha/sc2022_ISAAC_artifact/blob/main/run_experiment.sh). This script submits to the batch system the experiments described previously. This script is only runnable by the user and should not be modified. 
 
+The configuration variables defined in `config_vars.sh` are described next:
+
+* `MAIL`. Specifies what e-mail will receive a notification when a submitted experiment is running. This variable is optional.
+* `PROJ_ID`. Specifies what project id to use to submit a job. This variable is mandatory.
+* `MY_INSTALLATION_PATH`. Indicates the installation path of all software stack. Make sure `MY_INSTALLATION_PATH` is under `$PROJWORK/<proj_id>/<user_id>`. This variable is mandatory.
+* `MY_ISAAC_LOG_PATH`. Specifies the path of the performance files generated when running the code. Make sure `MY_ISAAC_LOG_PATH` is under `MY_INSTALLATION_PATH`. This variable is mandatory.
+* `MY_SIMULATIONS_PATH`. Sets the simulations' path. Make sure it is under `MY_INSTALLATION_PATH`. This variable is mandatory.
+* `MY_SIMULATION_NAME`. Indicates the name of the simulation. This variable is mandatory.
+* `SYSTEM`. Specifies the target cluster to install and execute the experiments. Available options are: `summit`, `crusher`. This variable is mandatory
+* `EXPERIMENT_NAME`. Sets the experiment name that will be submitted to the batch system.
+    - Options for summit are: `64_gpus`, `strong_scaling`, `weak_scaling`.
+    - Options for crusher are: `first_experiment`, `second_experiment`, `weak_scaling`. This variable is mandatory.
+* `FRAMEBUFFER`. Sets the framebuffer resolution. This option is only used on `SYSTEM=summit` and `EXPERIMENT_NAME=64_gpus`.
+    - Available options: 720 , 1080 , 1440 , 2160.
+* `N_GPUS`. Sets the number of GPUs for strong scaling and weak scaling experiments.
+    - Options for `SYSTEM=summit` and `EXPERIMENT_NAME=strong_scaling`: 1, 2, 4, 8, 16, 32, 64, 128, 256, 512.
+    - Options for `SYSTEM=summit` and `EXPERIMENT_NAME=weak_scaling`: 1, 8, 64, 512, 1000, 2755, 4096, 5832, 8000, 10648, 13824.
+    - Options for `SYSTEM=crusher` and `EXPERIMENT_NAME=weak_scaling`: 1 , 8 , 64 , 216 , 512 , 1000.
+
+## Installation
