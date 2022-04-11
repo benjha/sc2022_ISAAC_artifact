@@ -1,7 +1,7 @@
 
 # SC'2022 Artifact Description
 
-We reported the results of six experiments to evaluate the performance characteristics and portability of our in situ visualization solution. Three were run on Summit and the other three on Crusher. General simulations parameters:
+We reported the results of six experiments to evaluate the performance characteristics and portability of our in situ visualization solution. Three were run on Summit (`64_gpus`, `strong_scaling`, `weak_scaling`) and the other three on Crusher (`first_experiment`, `second_experiment`, `weak_scaling`. General simulations parameters:
 
 * Kelvin-Helmholtz instability simulation.
 * 256x256x256 cells per GPU, additionally on Crusher: 512x512x512 cells per GPU.
@@ -12,6 +12,12 @@ We reported the results of six experiments to evaluate the performance character
 * Timings are averaged from 1440 time steps. Starting simulation time step is 10 to allow stabilization. 
 * Camera view's animation is divided into four stages, each with 360 steps and a rotation around a different axis to cover most of the viewing angles. 
 * ISAAC streaming capabilities are disabled including image compression.
+
+The interested reader can check the PIConGPU’s documentation under this [link](https://picongpu.readthedocs.io) for details on how to set up a simulation and a experiment. The configuration files usedfor the experiments are available in our GitHub’s repository following the next links:
+
+Experiments are reproduced following the instructions of the next section.
+
+# Installation & Running Experiments
 
 We include three scripts to deploy the experiments in Summit and Crusher systems:
 
