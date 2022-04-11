@@ -58,3 +58,36 @@ The configuration variables defined in `config_vars.sh` are described next:
     - Options for `SYSTEM=crusher` and `EXPERIMENT_NAME=weak_scaling`: 1 , 8 , 64 , 216 , 512 , 1000.
 
 ## Installation
+
+Installation steps are as follows:
+
+1. Login to Summit or Crusher.
+2. Clone this repository:
+```
+$git clone https://github.com/benjha/sc2022_ISAAC_artifact.git
+```
+3. Go to `sc2022_ISAAC_artifact` directory.
+4. Set executable the permissions for `install.sh` and `run_experiment.sh` scripts:
+```
+$chmod +x install.sh
+$chmod +x run_experiment.sh
+```
+5. Set the next variables according to your preferences in config_vars.sh script:
+`MAIL`, `PROJ_ID`, `MY_INSTALLATION_PATH`, `MY_ISAAC_LOG_PATH`, `MY_SIMULATIONS_PATH`, `MY_SIMULATION_NAME`,`SYSTEM`.
+
+For example: 
+```
+export MAIL="mymail@myserver.com"
+export PROJ_ID=ABC123
+export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/sc2022_AD/summit
+export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs
+export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
+export MY_SIMULATION_NAME=kh_isaac_test
+export SYSTEM=summit
+```
+Note this example installs the software stack on Summit.
+
+6. Execute the installation script only once per system:
+```
+$./install.sh
+```
