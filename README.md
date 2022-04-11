@@ -1,7 +1,7 @@
 
 # SC'2022 Artifact Description
 
-We reported the results of six experiments to evaluate the performance characteristics and portability of our in situ visualization solution. Three were run on Summit (`64_gpus`, `strong_scaling`, `weak_scaling`) and the other three on Crusher (`first_experiment`, `second_experiment`, `weak_scaling`. General simulations parameters:
+We reported the results of six experiments to evaluate the performance characteristics and portability of our in situ visualization solution. Three were run on Summit (`64_gpus`, `strong_scaling`, `weak_scaling`) and the other three on Crusher (`first_experiment`, `second_experiment`, `weak_scaling`). General simulations parameters:
 
 * Kelvin-Helmholtz instability simulation.
 * 256x256x256 cells per GPU, additionally on Crusher: 512x512x512 cells per GPU.
@@ -13,7 +13,20 @@ We reported the results of six experiments to evaluate the performance character
 * Camera view's animation is divided into four stages, each with 360 steps and a rotation around a different axis to cover most of the viewing angles. 
 * ISAAC streaming capabilities are disabled including image compression.
 
-The interested reader can check the PIConGPU’s documentation under this [link](https://picongpu.readthedocs.io) for details on how to set up a simulation and a experiment. The configuration files usedfor the experiments are available in our GitHub’s repository following the next links:
+The interested reader can check the PIConGPU’s documentation under this [link](https://picongpu.readthedocs.io) for details on how to set up a simulation and a experiment. The configuration files used for the experiments are available following the next links:
+
+1. Summit
+    * 256x256x256 [Simulation](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/simulation/summit/KelvinHelmholtz)
+    * Experiment: [64_gpus](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/summit/64_gpus)
+    * Experiment: [strong_scaling](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/summit/strong_scaling)
+    * Experiment: [weak_scaling](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/summit/weak_scaling)
+2. Crusher
+    * 256x256x256 [Simulation](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/simulation/crusher/KelvinHelmholtz)
+    * 512x512x512 [Simulation](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/simulation/crusher/KelvinHelmholtz_large)
+    * Experiment: [first_experiment](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/crusher/first_experiment)
+    * Experiment: [second_experiment](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/crusher/second_experiment)
+    * Experiment: [weak_scaling](https://github.com/benjha/sc2022_ISAAC_artifact/tree/main/experiments/KelvinHelmholtz/crusher/weak_scaling)
+
 
 Experiments are reproduced following the instructions of the next section.
 
