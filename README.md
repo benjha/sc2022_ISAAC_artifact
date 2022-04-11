@@ -64,13 +64,13 @@ Installation steps are as follows:
 1. Login to Summit or Crusher.
 2. Clone this repository:
 ```
-$git clone https://github.com/benjha/sc2022_ISAAC_artifact.git
+git clone https://github.com/benjha/sc2022_ISAAC_artifact.git
 ```
 3. Go to `sc2022_ISAAC_artifact` directory.
 4. Set executable the permissions for `install.sh` and `run_experiment.sh` scripts:
 ```
-$chmod +x install.sh
-$chmod +x run_experiment.sh
+chmod +x install.sh
+chmod +x run_experiment.sh
 ```
 5. Set the next variables according to your preferences in config_vars.sh script:
 `MAIL`, `PROJ_ID`, `MY_INSTALLATION_PATH`, `MY_ISAAC_LOG_PATH`, `MY_SIMULATIONS_PATH`, `MY_SIMULATION_NAME`,`SYSTEM`.
@@ -89,5 +89,41 @@ Note this example installs the software stack on Summit.
 
 6. Execute the installation script only once per system:
 ```
-$./install.sh
+./install.sh
+```
+## Running an experiment
+
+For example, to run the weak_scaling experiment on Summit with 512 GPUs based on the previous section, follow the next steps:
+
+1. Set the next variables in config_vars.sh script:
+```
+export EXPERIMENT_NAME=weak_scaling
+export N_GPUS=512
+```
+2. Run the run_experiment.sh script:
+```
+./run_experiment.s
+```
+The complete definition of variables in `config_vars.sh` script for the 512 GPU weak scaling experiment on Summit is:
+```
+export MAIL="mymail@myserver.com"
+export PROJ_ID=ABC123
+export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/sc2022_AD/summit
+export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs
+export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
+export MY_SIMULATION_NAME=kh_isaac_test
+export SYSTEM=summit
+export EXPERIMENT_NAME=weak_scaling
+export N_GPUS=512
+```
+For completeness, a `config_vars.sh` script example that is used to install the software stack and run the Crusher's `second_experiment` is shown next:
+```
+export MAIL="mymail@myserver.com"
+export PROJ_ID=ABC123
+export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/sc2022_AD/crusher
+export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs
+export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
+export MY_SIMULATION_NAME=kh_isaac_test
+export SYSTEM=crusher
+export EXPERIMENT_NAME=second_experiment
 ```
