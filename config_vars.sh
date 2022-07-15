@@ -4,10 +4,10 @@
 export MAIL="hernandezarb@ornl.gov"
 
 # project id
-export PROJ_ID=STF011
+export PROJ_ID=CSC434_crusher
 
 # installation path
-export MY_INSTALLATION_PATH=$PROJWORK/csc434/benjha/tmp/crusher
+export MY_INSTALLATION_PATH=$PROJWORK/csc434/benjha/PIConGPU/tmp
 
 # path to timing log
 export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs

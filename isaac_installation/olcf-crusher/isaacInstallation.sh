@@ -1,6 +1,6 @@
 
 
-ISAAC_BRANCH="hip_icet_timers"
+ISAAC_BRANCH="7f9e627bef96504da1a4bcd821846e197f861bab"
 
 source isaac.profile
 
@@ -75,9 +75,10 @@ cd $HOME
 
 # get ISAAC and install Server binary
 if [ ! -d $ISAAC_DIR ]; then
-    git clone -b $ISAAC_BRANCH https://github.com/benjha/isaac.git \
+    git clone  https://github.com/benjha/isaac.git \
         $SOURCE_DIR/isaac
     cd $SOURCE_DIR/isaac
+    git checkout $ISAAC_BRANCH
     mkdir .build
     cd .build
     cmake -DCMAKE_INSTALL_PREFIX=$ISAAC_DIR \

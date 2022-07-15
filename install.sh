@@ -19,6 +19,7 @@ echo -e $MAG
 echo '--------Done!'
 echo
 echo '--------Installing PIConGPU in ' $MY_INSTALLATION_PATH
+mkdir -p $MY_INSTALLATION_PATH 
 cp -r $REPODIR/sources/$SYSTEM/picongpu $MY_INSTALLATION_PATH
 echo '--------Done!'
 echo
