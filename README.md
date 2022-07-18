@@ -97,7 +97,7 @@ ISAAC server should be run before a simulation starts. [`run_isaac_server.sh`](h
 
 Example in Crusher. Note all the bechmarks where configured to use Crusher's login1 node:
 
-* `ssh id@login1.crusher.ornl.gov -L 2459:login1:2459
+* `ssh id@login1.crusher.ornl.gov -L 2459:login1:2459`
 
 2. Go to the directory where the repo. was cloned and execute the `run_isaac_server.sh` script.
 
