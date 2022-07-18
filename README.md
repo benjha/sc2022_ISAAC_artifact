@@ -23,9 +23,9 @@ The configuration variables defined in `config_vars.sh` are described next:
 * `MY_SIMULATION_NAME`. Indicates the name of the simulation. This variable is mandatory.
 * `SYSTEM`. Specifies the target cluster to install and execute the experiments. Available options are: `crusher`. This variable is mandatory
 * `EXPERIMENT_NAME`. Sets the experiment name that will be submitted to the batch system.
-    - Options for summit are: `TWEAC-FOAM`, `strong_scaling`, `weak_scaling`.
+    - Options are: `TWEAC-FOAM`
 * `CONFIG_FILE`. Sets the experiment configuration file.
-    - Available options: 16.cfg
+    - Available options: 16.cfg,...
     - Full list of files: https://github.com/benjha/sc2022_ISAAC_artifact/tree/frontier-rocm-5.1.0/experiments/TWEAC-FOM/weak_scaling
 
 ## Installation
@@ -49,7 +49,7 @@ For example:
 ```
 export MAIL="mymail@myserver.com"
 export PROJ_ID=ABC123
-export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/sc2022_AD/crusher
+export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/TWEAC_ISAAC/crusher
 export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs
 export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
 export MY_SIMULATION_NAME=tweac_isaac_test
@@ -72,16 +72,16 @@ export CONFIG_FILE=16.cfg
 ```
 2. Run the run_experiment.sh script:
 ```
-./run_experiment.s
+./run_experiment.sh
 ```
-The complete definition of variables in `config_vars.sh` script for the 512 GPU weak scaling experiment on Summit is:
+The complete definition of variables in `config_vars.sh` script for the TWEAC benchmark on 16 GPUs Crusher:
 ```
 export MAIL="mymail@myserver.com"
 export PROJ_ID=ABC123
-export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/sc2022_AD/summit
+export MY_INSTALLATION_PATH=$PROJWORK/ABC123/myuserid/TWEAC_ISAAC/crusher
 export MY_ISAAC_LOG_PATH=$MY_INSTALLATION_PATH/isaac_logs
 export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
-export MY_SIMULATION_NAME=kh_isaac_test
+export MY_SIMULATION_NAME=tweac_isaac_test
 export SYSTEM=crusher
 export EXPERIMENT_NAME=TWEAC-FOM
 export CONFIG_FILE=16.cfg
