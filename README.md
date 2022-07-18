@@ -85,6 +85,7 @@ export MY_SIMULATION_NAME=kh_isaac_test
 export SYSTEM=crusher
 export EXPERIMENT_NAME=TWEAC-FOM
 export CONFIG_FILE=16.cfg
+```
 
 ## Running the ISAAC server
 
@@ -97,4 +98,3 @@ ISAAC server should be run before a simulation starts. [`run_isaac_server.sh`](h
 2. Go to the directory the repo. was cloned and execute the `run_isaac_server.sh` script.
 
 
-```
