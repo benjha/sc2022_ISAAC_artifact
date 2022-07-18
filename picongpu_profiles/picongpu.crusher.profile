@@ -25,16 +25,24 @@ export EDITOR="vim"
 # such as mpi, libfabric and others.
 # The following modules just add to these.
 
-# same as ISAAC
-module load PrgEnv-cray/8.2.0
-#module load PrgEnv-gnu/8.2.0
-
+# Compiling with cray compiler wrapper CC
+# Must be same as ISAAC
+module load PrgEnv-cray/8.3.3
 module load craype-accel-amd-gfx90a
-module load rocm/4.5.2
+module load rocm/5.1.0
 
-module load git/2.31.1
-module load cmake/3.21.3
-module load boost/1.77.0-cxx17
+export MPICH_GPU_SUPPORT_ENABLED=1
+module load cray-mpich/8.1.16
+
+module load cmake/3.22.2
+module load boost/1.78.0-cxx17
+
+## set environment variables required for compiling and linking w/ hipcc
+##   see (https://docs.olcf.ornl.gov/systems/crusher_quick_start_guide.html#compiling-with-hipcc)
+export CC=$(which hipcc)
+export CXX=$(which hipcc)
+export CXXFLAGS="$CXXFLAGS -I${MPICH_DIR}/include"
+export LDFLAGS="$LDFLAGS -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
 
 # Other Software ##############################################################
 #
@@ -66,9 +74,8 @@ module load libpng/1.6.37
 
 # Environment #################################################################
 #
-export MPICH_GPU_SUPPORT_ENABLED=1
 
-#export MY_HOME=$PROJWORK/csc434/benjha/src/crusher/picongpu_639375ed_hipcc
+#MY_INSTALLATION_PATH is defined in config_vars.sh
 export MY_HOME=$MY_INSTALLATION_PATH
 
 export PICSRC=$MY_HOME/picongpu
@@ -81,11 +88,11 @@ export PATH=$PATH:$PICSRC/src/tools/bin
 
 export PYTHONPATH=$PICSRC/lib/python:$PYTHONPATH
 
-export HIP_PATH=$ROCM_PATH/hip # has to be set in order to be able to compile
-export CMAKE_MODULE_PATH=$HIP_PATH/cmake:$CMAKE_MODULE_PATH
-export HIPCC_COMPILE_FLAGS_APPEND="$HIPCC_COMPILE_FLAGS_APPEND -I${MPICH_DIR}/include"
-export HIPCC_LINK_FLAGS_APPEND="$HIPCC_LINK_FLAGS_APPEND -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
-export HIPFLAGS="--amdgpu-target=gfx90a $HIPFLAGS"
+#export HIP_PATH=$ROCM_PATH/hip # has to be set in order to be able to compile
+#export CMAKE_MODULE_PATH=$HIP_PATH/cmake:$CMAKE_MODULE_PATH
+#export HIPCC_COMPILE_FLAGS_APPEND="$HIPCC_COMPILE_FLAGS_APPEND -I${MPICH_DIR}/include"
+#export HIPCC_LINK_FLAGS_APPEND="$HIPCC_LINK_FLAGS_APPEND -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
+#export HIPFLAGS="--amdgpu-target=gfx90a $HIPFLAGS"
 
 export ISAAC_LIBS="$MY_HOME/lib"
 export ISAAC_DIR=$MY_HOME/isaac_sources/isaac
@@ -151,8 +158,3 @@ else
     echo "bash completion file '$BASH_COMP_FILE' not found." >&2
 fi
 
-export CC=$(which hipcc)
-export CXX=$(which hipcc)
-
-#export CC=cc
-#export CXX=CC

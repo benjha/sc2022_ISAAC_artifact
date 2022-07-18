@@ -42,6 +42,10 @@ if [ "$INSTALL_Libwebsockets" = true ] && [ ! -d $Libwebsockets_DIR ]; then
     cmake -DCMAKE_INSTALL_PREFIX=$Libwebsockets_DIR -DLWS_WITH_SSL=OFF \
         $SOURCE_DIR/libwebsockets
     make -j4 install
+    if [ $? -ne 0 ]; then
+        echo '---------Failed to compile cannot continue'
+        exit 1
+    fi    
 fi
 
 #   libjpeg-turbo
@@ -54,6 +58,10 @@ if [ "$INSTALL_JPEG" = true ] && [ ! -d $JPEG_DIR ]; then
     cmake -DCMAKE_INSTALL_PREFIX=$JPEG_DIR \
         $SOURCE_DIR/libjpeg-turbo
     make -j4 install
+    if [ $? -ne 0 ]; then
+        echo '---------Failed to compile cannot continue'
+        exit 1
+    fi    
 fi
 
 # glm
@@ -68,6 +76,10 @@ if [ "$INSTALL_GLM" = true ]; then
     cmake -DCMAKE_INSTALL_PREFIX=$GLM_DIR -DGLM_TEST_ENABLE=OFF \
             $SOURCE_DIR/glm
     make -j4 install
+    if [ $? -ne 0 ]; then
+        echo '---------Failed to compile cannot continue'
+        exit 1
+    fi    
 fi
 
 
@@ -75,8 +87,8 @@ cd $HOME
 
 # get ISAAC and install Server binary
 if [ ! -d $ISAAC_DIR ]; then
-    git clone  https://github.com/benjha/isaac.git \
-        $SOURCE_DIR/isaac
+#    git clone  https://github.com/benjha/isaac.git \
+    git clone https://github.com/ComputationalRadiationPhysics/isaac.git $SOURCE_DIR/isaac
     cd $SOURCE_DIR/isaac
     git checkout $ISAAC_BRANCH
     mkdir .build
@@ -84,4 +96,8 @@ if [ ! -d $ISAAC_DIR ]; then
     cmake -DCMAKE_INSTALL_PREFIX=$ISAAC_DIR \
 	$SOURCE_DIR/isaac/server
     make -j4 install
+    if [ $? -ne 0 ]; then
+        echo '---------Failed to compile cannot continue'
+        exit 1
+    fi    
 fi

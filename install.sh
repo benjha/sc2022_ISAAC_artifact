@@ -10,17 +10,23 @@ echo '--------Compiling and installing dependencies and Isaac in ' $MY_INSTALLAT
 read -p "--------Press <enter> to continue"
 echo -e $NC
 
-cd isaac_installation/olcf-$SYSTEM/
-chmod +x isaacInstallation.sh
-./isaacInstallation.sh
+mkdir -p $MY_INSTALLATION_PATH
+
+#cd isaac_installation/olcf-$SYSTEM/
+#chmod +x isaacInstallation.sh
+#./isaacInstallation.sh
 cd $REPODIR
 
 echo -e $MAG
 echo '--------Done!'
 echo
+
 echo '--------Installing PIConGPU in ' $MY_INSTALLATION_PATH
-mkdir -p $MY_INSTALLATION_PATH 
-cp -r $REPODIR/sources/$SYSTEM/picongpu $MY_INSTALLATION_PATH
+read -p "---------Press <enter> to continue"
+#cp -r $REPODIR/sources/$SYSTEM/picongpu $MY_INSTALLATION_PATH/picongpu
+git clone -b dev https://github.com/ComputationalRadiationPhysics/picongpu.git $MY_INSTALLATION_PATH/picongpu
+echo '-------- increasing the GCDs reserved memory in  memory.param to 2GB'
+sed -i 's@750[[:space:]][*][[:space:]]1024[[:space:]][*][[:space:]]1024@uint64_t(2147483648)@g' $MY_INSTALLATION_PATH/picongpu/share/picongpu/benchmarks/TWEAC-FOM/include/picongpu/param/memory.param
 echo '--------Done!'
 echo
 echo '--------Loading PIConGPU environment'
@@ -37,36 +43,21 @@ mkdir -p $MY_SIMULATIONS_PATH
 mkdir -p $MY_ISAAC_LOG_PATH
 
 # Arguments
-# $1 KH_SIM
+# $1 EXPERIMENT_NAME
 # $2 MY_SIMULATION_NAME
-compile_simulation ()
+compile_benchmark ()
 {
     echo -e $MAG
     echo '--------Compiling Simulation ' $MY_SIMULATION_NAME
     echo '--------Simulation is in ' $MY_SIMULATIONS_PATH/$MY_SIMULATION_NAME
     read -p "--------Press <enter> to continue"
     echo -e $NC
-	
-    cp -r $REPODIR/experiments/KelvinHelmholtz/simulation/$SYSTEM/$KH_SIM $PICSRC/share/picongpu/examples
+
     cd $MY_SIMULATIONS_PATH
-    pic-create $PICSRC/share/picongpu/examples/$KH_SIM $MY_SIMULATION_NAME
+    pic-create $PICSRC/share/picongpu/benchmarks/$EXPERIMENT_NAME $MY_SIMULATION_NAME
     cd $MY_SIMULATION_NAME
     pic-build
 }
 
-KH_SIM=KelvinHelmholtz
-compile_simulation $KH_SIM $MY_SIMULATION_NAME
-
-#For crusher with need domain size 512x512x512:
-if [ "$SYSTEM" == "crusher" ]; then
-    # Sim. domain 512x512x512
-    KH_SIM=KelvinHelmholtz_large
-    MY_SIMULATION_NAME=${MY_SIMULATION_NAME}_large
-
-    echo -e $MAG
-    echo 'Note a second simulation of 512x512x512 will be compiled.'
-    echo -e $NC
-    
-    compile_simulation $KH_SIM $MY_SIMULATION_NAME
-fi
+compile_benchmark $EXPERIMENT_NAME $MY_SIMULATION_NAME
 

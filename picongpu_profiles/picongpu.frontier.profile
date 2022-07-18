@@ -75,7 +75,7 @@ module load libpng/1.6.37
 # Environment #################################################################
 #
 
-#export MY_HOME=$PROJWORK/csc434/benjha/src/crusher/picongpu_639375ed_hipcc
+#MY_INSTALLATION_PATH is defined in config_vars.sh
 export MY_HOME=$MY_INSTALLATION_PATH
 
 export PICSRC=$MY_HOME/picongpu
@@ -88,11 +88,11 @@ export PATH=$PATH:$PICSRC/src/tools/bin
 
 export PYTHONPATH=$PICSRC/lib/python:$PYTHONPATH
 
-export HIP_PATH=$ROCM_PATH/hip # has to be set in order to be able to compile
-export CMAKE_MODULE_PATH=$HIP_PATH/cmake:$CMAKE_MODULE_PATH
-export HIPCC_COMPILE_FLAGS_APPEND="$HIPCC_COMPILE_FLAGS_APPEND -I${MPICH_DIR}/include"
-export HIPCC_LINK_FLAGS_APPEND="$HIPCC_LINK_FLAGS_APPEND -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
-export HIPFLAGS="--amdgpu-target=gfx90a $HIPFLAGS"
+#export HIP_PATH=$ROCM_PATH/hip # has to be set in order to be able to compile
+#export CMAKE_MODULE_PATH=$HIP_PATH/cmake:$CMAKE_MODULE_PATH
+#export HIPCC_COMPILE_FLAGS_APPEND="$HIPCC_COMPILE_FLAGS_APPEND -I${MPICH_DIR}/include"
+#export HIPCC_LINK_FLAGS_APPEND="$HIPCC_LINK_FLAGS_APPEND -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
+#export HIPFLAGS="--amdgpu-target=gfx90a $HIPFLAGS"
 
 export ISAAC_LIBS="$MY_HOME/lib"
 export ISAAC_DIR=$MY_HOME/isaac_sources/isaac
