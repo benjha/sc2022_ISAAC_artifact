@@ -24,7 +24,7 @@ echo
 echo '--------Installing PIConGPU in ' $MY_INSTALLATION_PATH
 read -p "---------Press <enter> to continue"
 #cp -r $REPODIR/sources/$SYSTEM/picongpu $MY_INSTALLATION_PATH/picongpu
-git clone -b dev https://github.com/ComputationalRadiationPhysics/picongpu.git $MY_INSTALLATION_PATH/picongpu
+git clone -b $PICONGPU_BRANCH https://github.com/ComputationalRadiationPhysics/picongpu.git $MY_INSTALLATION_PATH/picongpu
 echo '-------- increasing the GCDs reserved memory in  memory.param to 2GB'
 sed -i 's@750[[:space:]][*][[:space:]]1024[[:space:]][*][[:space:]]1024@uint64_t(2147483648)@g' $MY_INSTALLATION_PATH/picongpu/share/picongpu/benchmarks/TWEAC-FOM/include/picongpu/param/memory.param
 echo '--------Done!'

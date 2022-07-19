@@ -7,13 +7,17 @@ export PIC_PROFILE=$(cd $(dirname $BASH_SOURCE) && pwd)"/"$(basename $BASH_SOURC
 #   - send me a mail on batch system jobs: NONE, BEGIN, END, FAIL, REQUEUE, ALL,
 #     TIME_LIMIT, TIME_LIMIT_90, TIME_LIMIT_80 and/or TIME_LIMIT_50
 export MY_MAILNOTIFY="BEGIN"
-export MY_MAIL="hernandezarb@ornl.gov"
+
+# MAIL is defined in config_vars.sh
+export MY_MAIL=$MAIL
 export MY_NAME="$(whoami) <$MY_MAIL>"
 
 
 # Project Information ######################################## (edit this line)
 #   - project for allocation and shared directories
-export PROJID=CSC434_crusher
+
+# PROJ_ID is defined in config_vars.sh
+export PROJID=$PROJ_ID
 
 # Text Editor for Tools ###################################### (edit this line)
 #   - examples: "nano", "vim", "emacs -nw", "vi" or without terminal: "gedit"
@@ -87,12 +91,6 @@ export PATH=$PATH:$PICSRC/bin
 export PATH=$PATH:$PICSRC/src/tools/bin
 
 export PYTHONPATH=$PICSRC/lib/python:$PYTHONPATH
-
-#export HIP_PATH=$ROCM_PATH/hip # has to be set in order to be able to compile
-#export CMAKE_MODULE_PATH=$HIP_PATH/cmake:$CMAKE_MODULE_PATH
-#export HIPCC_COMPILE_FLAGS_APPEND="$HIPCC_COMPILE_FLAGS_APPEND -I${MPICH_DIR}/include"
-#export HIPCC_LINK_FLAGS_APPEND="$HIPCC_LINK_FLAGS_APPEND -L${MPICH_DIR}/lib -lmpi -L${CRAY_MPICH_ROOTDIR}/gtl/lib -lmpi_gtl_hsa"
-#export HIPFLAGS="--amdgpu-target=gfx90a $HIPFLAGS"
 
 export ISAAC_LIBS="$MY_HOME/lib"
 export ISAAC_DIR=$MY_HOME/isaac_sources/isaac

@@ -1,7 +1,4 @@
 
-
-ISAAC_BRANCH="7f9e627bef96504da1a4bcd821846e197f861bab"
-
 source isaac.profile
 
 # $MY_HOME is defined in isaac.profile
