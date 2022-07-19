@@ -19,10 +19,10 @@ export MY_SIMULATIONS_PATH=$MY_INSTALLATION_PATH/simulations
 export MY_SIMULATION_NAME=tweac_isaac_test
 
 # picongpu branch or commit
-PICONGPU_BRANCH=dev
+export PICONGPU_BRANCH=dev
 
 # ISAAC branch or commit
-ISAAC_BRANCH=7f9e627bef96504da1a4bcd821846e197f861bab
+export ISAAC_BRANCH=7f9e627bef96504da1a4bcd821846e197f861bab
 
 # deployment system
 # options: crusher, frontier
