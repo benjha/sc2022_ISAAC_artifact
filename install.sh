@@ -12,9 +12,9 @@ echo -e $NC
 
 mkdir -p $MY_INSTALLATION_PATH
 
-#cd isaac_installation/olcf-$SYSTEM/
-#chmod +x isaacInstallation.sh
-#./isaacInstallation.sh
+cd isaac_installation/olcf-$SYSTEM/
+chmod +x isaacInstallation.sh
+./isaacInstallation.sh
 cd $REPODIR
 
 echo -e $MAG
