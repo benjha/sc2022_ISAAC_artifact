@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # end me a mail on job
-export MAIL="myemail@myserver.com"
+export MAIL="someone@example.com"
 
 # project id
 export PROJ_ID=CSC434_crusher
